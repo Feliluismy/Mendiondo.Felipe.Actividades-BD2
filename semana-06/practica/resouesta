@@ -1,0 +1,16 @@
+db.articulos.find()
+db.articulos.find({rubro:{$ne:"impresora"}})
+db.articulos.find({rubro:{$eq:"mouse"}})
+db.articulos.find({precio:{$gte:5000}})
+db.articulos.find({
+    $and:[
+        {rubro:{$eq:"impresora"}},
+        {precio:{$gte:3500}}
+    ]
+})
+db.articulos.find({
+    $and:[
+        {stock:{$gte:0}},
+        {stock:{$lte:4}}
+    ]
+})
