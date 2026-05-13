@@ -1,3 +1,4 @@
+"actividad-01"
 db.articulos.find()
 db.articulos.find({rubro:{$ne:"impresora"}})
 db.articulos.find({rubro:{$eq:"mouse"}})
@@ -14,4 +15,5 @@ db.articulos.find({
         {stock:{$lte:4}}
     ]
 })
-"hola"
+
+"actividad-02"
