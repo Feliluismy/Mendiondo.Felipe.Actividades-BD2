@@ -1,0 +1,30 @@
+"actividad-01"
+db.articulos.find()
+db.articulos.find({rubro:{$ne:"impresora"}})
+db.articulos.find({rubro:{$eq:"mouse"}})
+db.articulos.find({precio:{$gte:5000}})
+db.articulos.find({
+    $and:[
+        {rubro:{$eq:"impresora"}},
+        {precio:{$gte:3500}}
+    ]
+})
+db.articulos.find({
+    $and:[
+        {stock:{$gte:0}},
+        {stock:{$lte:4}}
+    ]
+})
+
+"actividad-02"
+db.articulos.deleteMany({rubro:'impresora'})
+db.articulos.deleteMany({_id:{$gte:5}})
+"actividad-03"
+db.articulos.find()
+db.articulos.updateOne({$and:[
+    {rubro:{$eq:"mouse"}},
+    {nombre:{$eq: "LOGITECH M90"}}
+]},{$set:{precio:4500}}
+)
+db.articulos.update({_id:6},{$set:{preovedores:["Martinez","Gutierrez"]}})
+db.articulos.update({_id:6},{$unset:{preovedores:[]}})
