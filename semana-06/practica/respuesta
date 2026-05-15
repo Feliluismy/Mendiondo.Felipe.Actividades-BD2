@@ -34,4 +34,26 @@ db.articulos.updateMany({_id:6},{$unset:{preovedores:[]}})
 db.articulos.find()
 db.articulos.updateMany({rubro:"monitor"},{$set:{stock:0}})
 db.articulos.updateMany({stock:0},{$set:{pedir:true}})
-db.articulos.updateMany({stock:0},{$set:{pedir:true}})
+db.articulos.updateMany({pedir:true},{$unset:{pedir:true}})
+
+"actividad-5"
+db.medicamentos.find()
+"and"
+db.medicamentos.find({$and:[{laboratorio:{$eq:'Roche'}},{precio:{$lte:5}}]})
+"Recupere los medicamentos cuyo laboratorio sea 'Roche' o cuyo"
+"precio sea menor a 5."
+db.medicamentos.find({$or:[{laboratorio:{$eq:'Roche'}},{precio:{$lte:5}}]})
+"Muestre todos los medicamentos cuyo laboratorio NO sea Bayer"
+db.medicamentos.find({laboratorio:{$ne:"Bayer"}})
+"Muestre todos los medicamentos cuyo laboratorio sea Bayer y cuya"
+"cantidad NO sea=100"
+db.medicamentos.find({$and:[{laboratorio:{$eq:"Bayer"}},{cantidad:{$ne:100}}]})
+"Elimine todos los documentos de la colección medicamentos cuyo"
+"laboratorio sea igual a Bayer y su precio sea mayor a 10"
+db.medicamentos.deleteMany({$and:[{laboratorio:{$eq:"Bayer"}},{precio:{$gt:10}}]})
+"Cambie la cantidad por 200, a todos los medicamentos de Roche"
+"cuyo precio sea mayor a 5"
+db.medicamentos.updateMany({$and:[{laboratorio:{$eq:"Roche"}},{precio:{$gt:5}}]},{$set:{cantidad:200}})
+"Borre los medicamentos cuyo laboratorio sea Bayer o cuyo precio"
+"sea menor a 3"
+db.medicamentos.deleteMany({$or:[{laboratorio:{$eq:"Bayer"}},{precio:{$lt:3}}]})
