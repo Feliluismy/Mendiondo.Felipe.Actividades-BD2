@@ -20,3 +20,6 @@ db.libros.find({'autor.nombre': {$eq: 'Borges'}})
 db.libros.find({$and: [{'autor.nacionalidad': {$eq: 'Española'}}, {'precio': {$eq: 45}}]})
 
 "actividad-6"
+"Imprimir todas las series."
+db.series.find()
+db.series.find({titulo: 'The big bang theory'},{temporada1: 1})
