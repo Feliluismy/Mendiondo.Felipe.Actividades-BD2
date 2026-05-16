@@ -1,0 +1,22 @@
+"Imprimir todos los documentos de la colección 'articulos'."
+db.articulos.find()
+"Modificar el precio del mouse 'LOGITECH M90'."
+db.articulos.updateMany({nombre : 'LOGITECH M90'},{$set:{precio: 567}})
+"Fijar el stock en 0 del artículo cuyo _id es 6"
+db.articulos.updateMany({_id: 6},{$set:{stock: 0}})
+"Agregar el campo proveedores con el array ['Martinez','Gutierrez'] para el"
+"artículo cuyo _id es 6."
+db.articulos.updateMany({_id: 6},{$set:{proveedores:['Martinez','Gutierrez']}})
+"Eliminar el campo proveedores para el artículo cuyo _id es 6."
+db.articulos.updateMany({_id: 6},{$unset:{proveedores:[]}})
+
+"actividad-5"
+db.libros.find()
+"Imprimir los libros cuyo autor es de nacionalidad Argentina."
+db.libros.find({'autor.nacionalidad': {$eq: 'Argentina'}})
+"Imprimir los libros cuyo autor se llama Borges."
+db.libros.find({'autor.nombre': {$eq: 'Borges'}})
+"Imprimir los libros cuyo autor es de nacionalidad Española y el precio es 45."
+db.libros.find({$and: [{'autor.nacionalidad': {$eq: 'Española'}}, {'precio': {$eq: 45}}]})
+
+"actividad-6"
