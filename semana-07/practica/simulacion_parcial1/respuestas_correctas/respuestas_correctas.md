@@ -1,0 +1,18 @@
+
+Preguntas 01
+✅ RESPUESTA CORRECTA: A
+
+
+Pregunta 02
+✅ RESPUESTA CORRECTA: A
+
+Pregunta 03
+✅ RESPUESTA CORRECTA: B
+
+
+Pregunta 04
+✅ RESPUESTA CORRECTA: B
+
+
+
+

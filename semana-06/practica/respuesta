@@ -57,3 +57,10 @@ db.medicamentos.updateMany({$and:[{laboratorio:{$eq:"Roche"}},{precio:{$gt:5}}]}
 "Borre los medicamentos cuyo laboratorio sea Bayer o cuyo precio"
 "sea menor a 3"
 db.medicamentos.deleteMany({$or:[{laboratorio:{$eq:"Bayer"}},{precio:{$lt:3}}]})
+
+"actividad-06"
+db.articulos.find()
+"Recupere el id y el nombre de todos los artículos"
+db.articulos.find({},{id:1,nombre:1})
+"Recupere el nombre y el precio de los artículos cuyo rubro sea impresora"
+db.articulos.find({rubro:"impresora"},{_id:0,nombre:1,precio:1})
