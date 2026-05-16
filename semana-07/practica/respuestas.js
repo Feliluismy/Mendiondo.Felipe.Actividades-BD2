@@ -33,4 +33,5 @@ db.alumnos.find()
 db.alumnos.find({},{_id:0,apellido:1,fechanacimiento:1})
 "Imprimir el nombre y el apellido de los alumnos ordenados por fecha de nacimiento de forma descendente."
 db.alumnos.find().sort({fechanacimiento: -1})
+"Imprimir todos los alumnos que nacieron a partir de 1970"
 db.alumnos.find({fechanacimiento: {$gte: new Date('1970-01-01')}})
