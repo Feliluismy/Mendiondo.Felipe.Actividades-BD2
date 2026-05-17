@@ -1,4 +1,44 @@
+"Seccion-1--------------------------------------"
 "ejercicio 1"
 "Listar el título, director y año de todas las películas argentinas ordenadas por año de forma ascendente."
-db.peliculas.find({pais:"Argentina"},{titulo:1, _id:0, director:1, 'año':1}).sort('año')
-db.peliculas.find({titulo:1, _id:0, calificacion:1}).limit(5).sort({calificacion:-1})
+db.peliculas.aggregate([{$match:{pais: "Argentina"}},
+{$project:{_id:0, titulo:1, director:1, 'año':1}},
+{$sort:{'año':1}}])
+
+"ejercicio 2"
+"Listar el título y la calificación de las 5 películas mejor calificadas."
+db.peliculas.aggregate([{$project:{_id:0, titulo:1, calificacion:1}},
+    {$sort:{calificacion:-1}},
+    {$limit:5}])
+
+"ejercicio 3"
+"Listar el título, director, año, duración y calificación de las 3 películas disponibles con duración mayor a 120 minutos y año mayor o igual a 2000 ordenadas por calificación de forma descendente."
+db.peliculas.aggregate([{$match : {
+    $and:[
+        {'año':{$gte : 2000}},{duracion:{$gt : 120}},{disponible:true}
+    ]}},
+    {$project:{_id:0,'ficha':
+        {$concat:['<','$titulo','>','(<','$director','>)']}
+        , año:1, duracion:1,calificacion:1}},
+    {$sort:{calificacion:-1}},
+    {$limit:3}])
+
+"Seccion-2--------------------------------------"
+"ejercicio-1"
+"Listar el número de películas por país ordenado de mayor a menor."
+db.peliculas.aggregate([{$group:{_id: "$pais", count: { $sum: 1 }}},
+    {$sort:{count:-1}}])
+"ejercicio-2"
+
+db.peliculas.aggregate([{$group:{_id: "$director", duracionPromedio: { $avg: "$duracion" }}},
+    {$sort:{duracionPromedio:-1}}])
+"ejercicio-3"
+
+db.peliculas.aggregate([{$group:{_id : "$estudio",
+    cantidad: { $sum : 1 },
+    calificacionPromedio:{$avg : "$calificacion"},
+    recaudacionTotal:{$sum : "$recaudacion"},
+    presupuestoMaximo:{$max : "$presupuesto"}}},
+    {$match:{cantidad:{$gte:2}}},
+    {$sort:{recaudacionTotal:-1}}])
+
