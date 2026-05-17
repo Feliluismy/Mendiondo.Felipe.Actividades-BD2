@@ -1,0 +1,4 @@
+"ejercicio 1"
+"Listar el título, director y año de todas las películas argentinas ordenadas por año de forma ascendente."
+db.peliculas.find({pais:"Argentina"},{titulo:1, _id:0, director:1, 'año':1}).sort('año')
+db.peliculas.find({titulo:1, _id:0, calificacion:1}).limit(5).sort({calificacion:-1})
