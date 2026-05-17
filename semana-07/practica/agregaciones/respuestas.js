@@ -42,3 +42,31 @@ db.peliculas.aggregate([{$group:{_id : "$estudio",
     {$match:{cantidad:{$gte:2}}},
     {$sort:{recaudacionTotal:-1}}])
 
+"Seccion-3--------------------------------------"
+"ejercicio-1"
+"Listar los géneros de películas sin repetir."
+db.peliculas.aggregate([{$unwind:"$generos"},
+    {$group: {_id:"$generos"}}
+])
+"ejercicio-2"
+"Listar los 5 actores que han participado en la mayor cantidad de películas."
+db.peliculas.aggregate([{$unwind:"$actores"},
+    {$sortByCount: "$actores"},
+    {$limit : 5}
+])
+"ejercicio-3"
+
+db.peliculas.aggregate([{$unwind : "$generos"},
+    {$group: {_id : "$generos",
+        cantidadPeliculas : {$sum : 1},
+        recaudacionTotal : {$sum : "$recaudacion"},
+        calificacionPromedio : {$avg : "$calificacion"}
+        
+    }},
+    {$match : {cantidadPeliculas: {$gte : 3}}},
+    {$sort : {calificacionPromedio : -1}},
+    {$project : {cantidadPeliculas : 1,
+        recaudacionTotal : 1,
+        calificacionPromedio : 
+        {$round : ["$calificacionPromedio", 2]}}}
+])
